@@ -22,9 +22,7 @@ except Exception as e:
     raise ImportError("No está instalado torch.") from e
 
 
-# =========================================================
 # UTILS Y PREPROCESAMIENTO
-# =========================================================
 def one_hot(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
     return pd.get_dummies(df, columns=cols, drop_first=False)
 
@@ -52,9 +50,7 @@ def build_sequences_3d(X2d: np.ndarray, L: int) -> np.ndarray:
     return X_seq
 
 
-# =========================================================
 # MODELO LSTM MULTI-STEP CON ATENCIÓN
-# =========================================================
 class LSTMAttentionFlexible(nn.Module):
     def __init__(
         self,
@@ -143,9 +139,7 @@ def load_model_from_pt(path_pt: str, device: str = "cpu") -> tuple[nn.Module, in
     return model, in_d
 
 
-# =========================================================
 # INFERENCIA LSTM
-# =========================================================
 def predecir_demanda_lstm(
     df: pd.DataFrame,
     ruta_modelo_pt: str,
@@ -202,9 +196,7 @@ def predecir_demanda_lstm(
     return y_hat, attn_w
 
 
-# =========================================================
 # MPC
-# =========================================================
 def mpc_ducha_soft_lstm(
     df_in: pd.DataFrame,
     demanda_pred_matrix: np.ndarray,
@@ -383,9 +375,7 @@ def mpc_ducha_soft_lstm(
     return df
 
 
-# =========================================================
 # MAIN
-# =========================================================
 def main():
     print("MPC + LSTM (H=12 Multi-step)")
 
